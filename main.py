@@ -8,6 +8,12 @@ def main():
     print(f"Screen width: {constants.SCREEN_WIDTH}\nScreen height: {constants.SCREEN_HEIGHT}")
     pygame.init()
     screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
+    
+    # Grouping
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     # spawn point
     x = constants.SCREEN_WIDTH / 2
     y = constants.SCREEN_HEIGHT / 2
@@ -27,9 +33,14 @@ def main():
                 return  
 
         screen.fill("black")
-        player_ship.draw(screen)
+
+        updatable.update(dt)
+
+        for object in drawable:
+            object.draw(screen)
+        
         pygame.display.flip()
-        player_ship.update(dt)
+        
 
         dt = clock.tick(60) / 1000
         
