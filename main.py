@@ -12,7 +12,10 @@ def main():
     # Grouping
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+
 
     # spawn point
     x = constants.SCREEN_WIDTH / 2
